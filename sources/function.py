@@ -30,3 +30,9 @@ def find_recipes(user_ingredients):
 def suggest_alternatives(ingredient):
     return alternatives_db.get(ingredient, [])
 
+
+# 쇼핑 리스트 만드는 함수 
+def create_shopping_list(selected_recipe, user_ingredients):
+    shopping_list = [ingredient for ingredient in selected_recipe['ingredients']
+                     if ingredient not in user_ingredients]
+    return shopping_list
