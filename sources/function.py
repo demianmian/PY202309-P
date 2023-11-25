@@ -72,12 +72,6 @@ alternatives_db = {
 
 
 # 사용자가 가진 재료를 기반으로 레시피를 찾는 함수
-'''def find_recipes(user_ingredients):
-    possible_recipes = []
-    for recipe in recipes_db:
-        if set(recipe['ingredients']).issubset(set(user_ingredients)):
-            possible_recipes.append(recipe['name'])
-    return possible_recipes'''
 def find_recipes(user_ingredients, recipes_db):
     # 사용자가 가진 재료를 기반으로 레시피를 찾아 리스트로 반환합니다.
     recommended_recipes = []
