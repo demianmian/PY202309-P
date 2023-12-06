@@ -133,14 +133,23 @@ alternatives_db = {
 }
 
 
-# 사용자가 가진 재료를 기반으로 레시피를 찾는 함수
+'''# 사용자가 가진 재료를 기반으로 레시피를 찾는 함수
 def find_recipes(user_ingredients, recipes_db):
     # 사용자가 가진 재료를 기반으로 레시피를 찾아 리스트로 반환합니다.
     recommended_recipes = []
     for recipe in recipes_db:
         if any(ingredient in user_ingredients for ingredient in recipe['ingredients']):
             recommended_recipes.append(recipe['name'])
+    return recommended_recipes'''
+# 사용자가 가진 재료를 기반으로 레시피를 찾는 함수
+def find_recipes(user_ingredients, recipes_db):
+    # 사용자가 가진 재료를 기반으로 레시피를 찾아 리스트로 반환합니다.
+    recommended_recipes = []
+    for recipe in recipes_db:
+        if any(ingredient in user_ingredients for ingredient in recipe['ingredients']):
+            recommended_recipes.append(recipe)  # 레시피 전체를 추가
     return recommended_recipes
+
 
 # 대체 재료를 제안하는 함수
 def suggest_alternatives(ingredient):

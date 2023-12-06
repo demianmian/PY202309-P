@@ -10,19 +10,19 @@ while True:
     available_recipes = find_recipes(user_ingredients, recipes_db)
     if available_recipes:
         print("\n가지고 있는 재료로 만들 수 있는 레시피:")
-        for recipe in available_recipes:
-            print(f" - {recipe}")
+        for idx, recipe in enumerate(available_recipes, 1):
+            print(f" - {idx}. {recipe['name']}")
     else:
         print("\n가진 재료로 만들 수 있는 레시피가 없습니다.")
 
     # 사용자가 만들고 싶은 레시피를 선택할 수 있도록 안내
-    selected_recipe_name = input("\n만들고 싶은 레시피 이름을 입력하시거나, 없으면 엔터를 눌러주세요: ")
-    if selected_recipe_name:
-        selected_recipe = next((recipe for recipe in recipes_db if recipe['name'] == selected_recipe_name), None)
+    selected_recipe_idx = input("\n만들고 싶은 레시피 번호를 입력해주세요: ")
+    if selected_recipe_idx.isdigit():
+        selected_recipe = available_recipes[int(selected_recipe_idx) - 1]
 
         # 선택한 레시피가 있다면, 필요한 재료를 체크
         if selected_recipe:
-            print(f"\n{selected_recipe_name} 레시피에 필요한 재료:")
+            print(f"\n{selected_recipe['name']} 레시피에 필요한 재료:")
             missing_ingredients = []
             for ingredient in selected_recipe['ingredients']:
                 # 재료가 사용자가 가지고 있는 재료인지 확인
@@ -33,7 +33,6 @@ while True:
                     alternatives = suggest_alternatives(ingredient)
                     alternative_text = f" (대체재료: {', '.join(alternatives)})" if alternatives else ""
                     print(f" - {ingredient} (필요함){alternative_text}")
-            
 
             # 쇼핑 리스트를 생성
             shopping_list = create_shopping_list(selected_recipe, user_ingredients)
@@ -50,11 +49,12 @@ while True:
                 if save_option.lower() == 'yes':
                     filename = save_shopping_list(shopping_list)
                     print(f"쇼핑 리스트가 {filename}에 저장되었습니다.")
-                # 레시피 지침을 출력하는 코드를 추가
-                print_recipe_instructions(selected_recipe_name, recipes_db)
+
+            # 레시피 지침을 출력하는 코드를 추가
+            print_recipe_instructions(selected_recipe['name'], recipes_db)
             break
         else:
             print("선택한 레시피를 찾을 수 없습니다.")
     else:
-        # 엔터를 눌렀을 경우, 다시 재료 입력 단계로 돌아감
+        # 숫자가 아닌 값을 입력한 경우, 다시 레시피 선택 단계로 돌아감
         continue
