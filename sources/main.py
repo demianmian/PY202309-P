@@ -1,5 +1,6 @@
-from function import find_recipes, suggest_alternatives, recipes_db, create_shopping_list, print_recipe_instructions
+from function import find_recipes, suggest_alternatives, create_shopping_list, print_recipe_instructions
 from shopping_list_manager import save_shopping_list
+import recipes_module
 
 while True:
     # 사용자로부터 재료를 입력받기
@@ -7,7 +8,7 @@ while True:
     user_ingredients = [ingredient.strip() for ingredient in input_ingredients.split(',')]
 
     # 가진 재료로 만들 수 있는 레시피 추천
-    available_recipes = find_recipes(user_ingredients, recipes_db)
+    available_recipes = find_recipes(user_ingredients, recipes_module.recipes_db)
     if available_recipes:
         print("\n가지고 있는 재료로 만들 수 있는 레시피:")
         for idx, recipe in enumerate(available_recipes, 1):
@@ -51,7 +52,7 @@ while True:
                     print(f"쇼핑 리스트가 {filename}에 저장되었습니다.")
 
             # 레시피 지침을 출력하는 코드를 추가
-            print_recipe_instructions(selected_recipe['name'], recipes_db)
+            print_recipe_instructions(selected_recipe['name'], recipes_module.recipes_db)
             break
         else:
             print("선택한 레시피를 찾을 수 없습니다.")
