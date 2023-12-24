@@ -1,5 +1,5 @@
-
 import recipes_module
+
 # 사용자가 가진 재료를 기반으로 레시피를 찾는 함수
 def find_recipes(user_ingredients, recipes_db):
     # 사용자가 가진 재료를 기반으로 레시피를 찾아 리스트로 반환합니다.

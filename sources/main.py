@@ -2,7 +2,6 @@ from function import find_recipes, suggest_alternatives, create_shopping_list, p
 from shopping_list_manager import save_shopping_list
 import recipes_module
 
-
 while True:
     # 사용자로부터 재료를 입력받기
     input_ingredients = input("가지고 있는 재료를 쉼표로 구분하여 입력해주세요: ")
